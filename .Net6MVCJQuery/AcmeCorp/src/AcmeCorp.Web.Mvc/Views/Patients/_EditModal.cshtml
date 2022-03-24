@@ -1,0 +1,50 @@
+﻿@using AcmeCorp.Web.Models.Common.Modals
+@using AcmeCorp.HealthCare
+@model AcmeCorp.HealthCare.Dto.PatientDto
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditPatient")))
+<form name="PatientEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="modal-body">
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="edit-patient-details">
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="patientname">@L("PatientId")</label>
+                    <div class="col-md-9">
+                        <input id="patientid" type="text" class="form-control" name="PatientId" value="@Model.PatientId" required maxlength="20" minlength="2">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="name">@L("PatientName")</label>
+                    <div class="col-md-9">
+                        <input id="patientname" type="text" class="form-control" name="PatientName" value="@Model.PatientName" required maxlength="20">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="dateofbirth">@L("DateOfBirth")</label>
+                    <div class="col-md-9">
+                        <input id="dateofbirth" type="date" class="form-control" name="DateOfBirth" value="@Model.DateOfBirth" required>
+                    </div>
+                </div>
+                
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label">@L("Gender")</label>
+
+                    <div class="col-md-9">
+                        <fieldset>
+                            @foreach (var value in Enum.GetValues(typeof(Gender)))
+                            {
+                                <input type="radio" name="@value" id="CreatePatienGender"/> <label for="@value">@value</label>
+                            }
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Patients/_EditModal.js" asp-append-version="true"></script>

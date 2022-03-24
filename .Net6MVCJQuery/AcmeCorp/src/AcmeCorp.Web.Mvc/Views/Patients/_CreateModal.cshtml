@@ -1,0 +1,53 @@
+﻿@using AcmeCorp.HealthCare
+@using AcmeCorp.Web.Models.Common.Modals
+@model Abp.Application.Services.Dto.PagedResultDto<AcmeCorp.HealthCare.Dto.PatientDto>
+@{
+    Layout = null;
+}
+<div class="modal fade" id="PatientCreateModal" tabindex="-1" role="dialog" aria-labelledby="PatientCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewPatient")))
+            <form name="PatientCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="tab-content mt-4">
+                        <div role="tabpanel" class="tab-pane container active" id="create-Patient-details">
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("PatientId")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="PatientId" required maxlength="20" minlength="2">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("PatientName")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="PatientName" required maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("DateOfBirth")</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" name="DateOfBirth" required>
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("Gender")</label>
+
+                                <div class="col-md-9">
+                                    <fieldset>
+                                        @foreach (var value in Enum.GetValues(typeof(Gender)))
+                                        {
+                                            <input type="radio" name="@value" id="CreatePatienGender"/> <label for="@value">@value</label>
+                                        }
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

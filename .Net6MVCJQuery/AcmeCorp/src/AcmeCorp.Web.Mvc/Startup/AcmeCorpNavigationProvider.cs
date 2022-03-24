@@ -29,6 +29,14 @@ namespace AcmeCorp.Web.Startup
                         icon: "fas fa-home",
                         requiresAuthentication: true
                     )
+                ).AddItem(  
+                    new MenuItemDefinition(
+                        PageNames.Patients,
+                        L("Patients"),
+                        url: "Patients?skip=0&&take=10",
+                        icon: "fas fa-hospital-user",
+                        permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Patients)
+                    )
                 ).AddItem(
                     new MenuItemDefinition(
                         PageNames.Tenants,
